@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONYX | The Unseen World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        'onyx-black': '#000000',
+                        'onyx-charcoal': '#0A0A0A',
+                        'onyx-gold': '#D4AF37',
+                        'onyx-gold-light': '#F4E5B0',
+                        'onyx-gold-dark': '#8A7120',
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #8A7120 0%, #D4AF37 50%, #F4E5B0 100%)',
+                        'gold-text': 'linear-gradient(to bottom, #F4E5B0, #D4AF37, #8A7120)',
+                        'spotlight': 'radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(212, 175, 55, 0.06), transparent 40%)',
+                        'velvet': 'radial-gradient(circle at 50% 50%, #111 0%, #000 100%)',
+                    },
+                    animation: {
+                        'shimmer': 'shimmer 8s linear infinite',
+                        'reveal': 'reveal 1.5s cubic-bezier(0.2, 1, 0.3, 1) forwards',
+                        'float-subtle': 'float 6s ease-in-out infinite',
+                        'sheen': 'sheen 4s ease-in-out infinite',
+                        'pulse-gold': 'pulseGold 3s infinite',
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' }
+                        },
+                        reveal: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        sheen: {
+                            '0%, 100%': { left: '-100%', opacity: '0' },
+                            '50%': { left: '200%', opacity: '0.3' },
+                        },
+                        pulseGold: {
+                            '0%, 100%': { borderColor: 'rgba(212, 175, 55, 0.1)' },
+                            '50%': { borderColor: 'rgba(212, 175, 55, 0.5)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #E5E5E5;
+            cursor: default;
+        }
+
+        /* Gold Foil Text */
+        .text-gold {
+            background: linear-gradient(to bottom, #F4E5B0 20%, #D4AF37 50%, #8A7120 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 100%;
+        }
+
+        .text-gold-shimmer {
+            background: linear-gradient(to right, #8A7120 20%, #F4E5B0 50%, #8A7120 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 6s linear infinite;
+        }
+
+        /* Noise Texture */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Spotlight Effect Container */
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+        
+        .spotlight-card::before {
+            content: "";
+            border-radius: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(212, 175, 55, 0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .card-sheen {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transform: skewX(-25deg);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-onyx-gold selection:text-black">
+
+    <div class="noise"></div>
+
+    <!-- File Navigation Dropdown -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60]">
+        <select onchange="if(this.value) window.location.href=this.value" class="bg-black/90 backdrop-blur text-onyx-gold px-6 py-3 text-xs font-serif tracking-widest border-2 border-onyx-gold hover:bg-onyx-gold hover:text-black transition-all cursor-pointer rounded-full shadow-[0_8px_32px_rgba(212,175,55,0.4)]">
+            <option value="">🎨 Switch Style</option>
+            <option value="style-01.html">Refine AI</option>
+            <option value="style-02.html">Nook</option>
+            <option value="style-03.html">Prism</option>
+            <option value="style-04.html">GRIT</option>
+            <option value="style-05.html">Dough</option>
+            <option value="style-06.html">Lumina</option>
+            <option value="style-07.html">NetRunner</option>
+            <option value="style-08.html">VANTAGE</option>
+            <option value="style-09.html">JOLT</option>
+            <option value="style-10.html" selected>ONYX</option>
+            <option value="style-11.html">Gaia</option>
+            <option value="wild-01.html">Neon Vortex</option>
+            <option value="wild-02.html">MORPHIC</option>
+            <option value="skill.html">Master Index</option>
+        </select>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 top-0 py-8 transition-all duration-500 bg-gradient-to-b from-black to-transparent">
+        <div class="max-w-[1400px] mx-auto px-8 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl tracking-[0.2em] text-white">ONYX</a>
+            
+            <div class="hidden md:flex gap-16 font-sans text-xs tracking-[0.3em] text-gray-500 uppercase">
+                <a href="#privileges" class="hover:text-onyx-gold transition-colors duration-500">Privileges</a>
+                <a href="#card" class="hover:text-onyx-gold transition-colors duration-500">The Artefact</a>
+                <a href="#membership" class="hover:text-onyx-gold transition-colors duration-500">Inquire</a>
+            </div>
+
+            <button class="px-8 py-3 border border-onyx-gold/30 rounded-sm text-onyx-gold font-sans text-[10px] tracking-[0.3em] uppercase hover:bg-onyx-gold hover:text-black transition-all duration-500">
+                Member Login
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center relative overflow-hidden bg-velvet pt-20 lg:pt-0">
+        <!-- Ambient Light -->
+        <div class="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-onyx-gold/5 rounded-full blur-[120px]"></div>
+
+        <div class="max-w-[1400px] mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center z-10">
+            
+            <!-- Left: Text -->
+            <div class="lg:col-span-5 order-2 lg:order-1 relative pb-20 lg:pb-0">
+                <div class="w-[1px] h-24 bg-gradient-to-b from-onyx-gold to-transparent mb-8"></div>
+                
+                <h2 class="font-sans text-xs tracking-[0.4em] text-onyx-gold mb-6 uppercase animate-reveal" style="animation-delay: 0.2s;">Invitation Only</h2>
+                
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-8xl text-white mb-8 leading-tight animate-reveal" style="animation-delay: 0.4s;">
+                    BEYOND <br>
+                    <span class="text-gold-shimmer italic pr-4">OPULENCE.</span>
+                </h1>
+                
+                <p class="font-sans font-light text-gray-400 text-sm leading-8 max-w-md mb-12 animate-reveal" style="animation-delay: 0.6s;">
+                    A financial instrument forged for the few. 24/7 Concierge, private aviation access, and a limit that does not exist.
+                </p>
+
+                <div class="flex items-center gap-8 animate-reveal" style="animation-delay: 0.8s;">
+                    <button class="group relative px-10 py-4 bg-transparent border border-white/10 overflow-hidden transition-all duration-500 hover:border-onyx-gold">
+                        <span class="relative z-10 font-sans text-xs tracking-[0.3em] uppercase text-white group-hover:text-black transition-colors">Request Access</span>
+                        <div class="absolute inset-0 bg-onyx-gold transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></div>
+                    </button>
+                    
+                    <a href="#film" class="font-sans text-xs tracking-[0.3em] uppercase text-gray-500 hover:text-white transition-colors flex items-center gap-3">
+                        <span class="w-8 h-[1px] bg-gray-600"></span> Watch Film
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: The Card (Hero Object) -->
+            <div class="lg:col-span-7 order-1 lg:order-2 relative h-[500px] lg:h-[700px] flex items-center justify-center perspective-[1200px]">
+                
+                <!-- The Card -->
+                <div class="relative w-[300px] h-[480px] lg:w-[360px] lg:h-[580px] bg-[#080808] rounded-2xl border border-white/5 animate-float-subtle transform rotate-y-[-12deg] rotate-x-[5deg] hover:rotate-y-[0deg] hover:rotate-x-[0deg] transition-transform duration-1000 ease-out z-20 group overflow-hidden shadow-[0_30px_80px_-10px_rgba(0,0,0,1)]">
+                    
+                    <!-- Animated Border Glow -->
+                    <div class="absolute inset-0 border-[2px] border-transparent animate-pulse-gold rounded-2xl pointer-events-none"></div>
+
+                    <!-- Matte Texture -->
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-40 mix-blend-overlay"></div>
+                    
+                    <!-- Moving Sheen Effect -->
+                    <div class="card-sheen animate-sheen"></div>
+
+                    <!-- Content On Card -->
+                    <div class="absolute inset-0 p-8 flex flex-col justify-between z-10">
+                        <div class="flex justify-between items-start">
+                            <span class="font-serif text-white/30 text-xl tracking-widest group-hover:text-white/50 transition-colors">ONYX</span>
+                            <!-- Chip with shine -->
+                            <div class="w-12 h-9 rounded bg-gradient-to-br from-[#B8860B] to-[#DAA520] border border-yellow-400/30 shadow-[0_0_15px_rgba(218,165,32,0.3)] relative overflow-hidden">
+                                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer opacity-50"></div>
+                            </div>
+                        </div>
+
+                        <!-- Card Number (Minimal) -->
+                        <div class="font-sans text-gray-400 text-sm tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity duration-700 translate-y-4 group-hover:translate-y-0 transform">
+                            •••• •••• •••• 8888
+                        </div>
+
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <div class="font-sans text-[0.6rem] text-gray-500 uppercase tracking-widest mb-1">Member Since</div>
+                                <div class="font-serif text-white/90 tracking-widest text-lg drop-shadow-md">2025</div>
+                            </div>
+                            <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5 backdrop-blur-sm group-hover:border-onyx-gold/50 transition-colors">
+                                <span class="font-serif text-onyx-gold text-sm group-hover:text-white transition-colors">O</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edge Highlight (Simulating Metal Edge) -->
+                    <div class="absolute -right-[1px] top-0 w-[1px] h-full bg-gradient-to-b from-transparent via-white/40 to-transparent opacity-50"></div>
+                    <div class="absolute -left-[1px] top-0 w-[1px] h-full bg-gradient-to-b from-transparent via-white/20 to-transparent opacity-30"></div>
+                </div>
+
+                <!-- Shadow Floor -->
+                <div class="absolute bottom-10 lg:bottom-20 w-[200px] h-[30px] bg-black/90 blur-2xl rounded-[100%]"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quote / Transition -->
+    <section class="py-32 bg-onyx-charcoal relative">
+        <div class="max-w-4xl mx-auto text-center px-8">
+            <span class="block text-4xl mb-8 text-onyx-gold">❝</span>
+            <h3 class="font-serif text-3xl md:text-5xl leading-normal text-gray-300">
+                Luxury must be comfortable, otherwise it is not luxury. It is merely expensive.
+            </h3>
+            <div class="mt-12 w-24 h-[1px] bg-onyx-gold/30 mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- Privileges Grid (Spotlight Effect) -->
+    <section id="privileges" class="py-32 px-8 bg-black">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24">
+                <h2 class="font-serif text-4xl text-white">Privileges</h2>
+                <span class="font-sans text-xs text-gray-600 tracking-[0.2em] uppercase">Global Access Tier 1</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-1" id="cards-container">
+                <!-- Card 1 -->
+                <div class="spotlight-card relative bg-[#050505] p-12 border border-white/5 group hover:z-10 transition-colors duration-500 hover:bg-[#080808]">
+                    <div class="font-serif text-5xl text-onyx-gold/20 mb-8 group-hover:text-onyx-gold transition-colors duration-500">I</div>
+                    <h3 class="font-serif text-2xl text-white mb-4">Private Aviation</h3>
+                    <p class="font-sans text-sm text-gray-500 leading-7 font-light">
+                        Guaranteed availability on our fleet of mid-size and heavy jets with as little as 4 hours notice. No ferry fees.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="spotlight-card relative bg-[#050505] p-12 border border-white/5 group hover:z-10 transition-colors duration-500 hover:bg-[#080808]">
+                    <div class="font-serif text-5xl text-onyx-gold/20 mb-8 group-hover:text-onyx-gold transition-colors duration-500">II</div>
+                    <h3 class="font-serif text-2xl text-white mb-4">Curated Access</h3>
+                    <p class="font-sans text-sm text-gray-500 leading-7 font-light">
+                        Front row at Fashion Week, backstage at the Opera, and tables at restaurants that are officially fully booked.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="spotlight-card relative bg-[#050505] p-12 border border-white/5 group hover:z-10 transition-colors duration-500 hover:bg-[#080808]">
+                    <div class="font-serif text-5xl text-onyx-gold/20 mb-8 group-hover:text-onyx-gold transition-colors duration-500">III</div>
+                    <h3 class="font-serif text-2xl text-white mb-4">Wealth Advisory</h3>
+                    <p class="font-sans text-sm text-gray-500 leading-7 font-light">
+                        Direct line to senior partners at the world's leading private banks. Tax mitigation strategies for the global citizen.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Object / Materiality -->
+    <section id="card" class="py-32 relative overflow-hidden bg-gradient-to-b from-black to-[#0A0A0A]">
+        <div class="max-w-[1400px] mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+            
+            <div class="order-2 md:order-1">
+                <div class="relative w-full aspect-square max-w-[500px] mx-auto">
+                    <!-- Circle Graphic -->
+                    <div class="absolute inset-0 border border-white/5 rounded-full animate-spin-slow" style="animation-duration: 60s;"></div>
+                    <div class="absolute inset-[10%] border border-white/5 rounded-full animate-spin-slow" style="animation-duration: 40s; animation-direction: reverse;"></div>
+                    
+                    <!-- Center Image (Abstract Metal) -->
+                    <div class="absolute inset-[20%] rounded-full overflow-hidden grayscale contrast-125 hover:grayscale-0 transition-all duration-1000">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-60" alt="Material">
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-1 md:order-2">
+                <span class="font-sans text-xs tracking-[0.3em] text-onyx-gold mb-6 block uppercase">Materiality</span>
+                <h2 class="font-serif text-5xl text-white mb-8">Forged, Not Printed.</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="font-serif text-xl text-white mb-2">Black PVD Titanium</h4>
+                        <p class="font-sans text-sm text-gray-500 font-light">
+                            16g of solid metal. PVD coated for a finish harder than steel and smooth as glass.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-white mb-2">24K Gold Inlay</h4>
+                        <p class="font-sans text-sm text-gray-500 font-light">
+                            Each card is hand-finished with pure gold inlay for the numbering and member name.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership / Inquiry -->
+    <section id="membership" class="py-40 bg-black relative">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
+        
+        <div class="max-w-2xl mx-auto text-center px-8 relative z-10">
+            <h2 class="font-serif text-4xl md:text-5xl text-white mb-6">The Ledger is Open.</h2>
+            <p class="font-sans text-gray-500 text-sm leading-7 mb-12">
+                We accept 50 new members annually. <br>
+                Initiate your inquiry below.
+            </p>
+
+            <form class="space-y-12">
+                <div class="relative group">
+                    <input type="text" placeholder="FULL NAME" class="w-full bg-transparent border-b border-gray-800 py-4 text-center font-serif text-xl text-white placeholder-gray-700 focus:outline-none focus:border-onyx-gold transition-colors">
+                </div>
+                <div class="relative group">
+                    <input type="email" placeholder="PRIVATE EMAIL" class="w-full bg-transparent border-b border-gray-800 py-4 text-center font-serif text-xl text-white placeholder-gray-700 focus:outline-none focus:border-onyx-gold transition-colors">
+                </div>
+                
+                <button class="mt-12 px-16 py-5 bg-onyx-gold text-black font-sans text-xs tracking-[0.3em] uppercase hover:bg-white transition-colors duration-500">
+                    Submit Inquiry
+                </button>
+            </form>
+            
+            <p class="mt-12 font-sans text-[10px] text-gray-700 tracking-widest uppercase">
+                Initiation Fee: $10,000 USD &nbsp;|&nbsp; Annual Dues: $5,000 USD
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-white/5 bg-[#020202]">
+        <div class="max-w-[1400px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="font-serif text-2xl tracking-[0.2em] text-gray-700">ONYX</div>
+            
+            <div class="flex gap-12 font-sans text-[10px] tracking-[0.2em] text-gray-600 uppercase">
+                <a href="#" class="hover:text-onyx-gold transition-colors">Concierge</a>
+                <a href="#" class="hover:text-onyx-gold transition-colors">Legal</a>
+                <a href="#" class="hover:text-onyx-gold transition-colors">Login</a>
+            </div>
+
+            <div class="font-sans text-[10px] text-gray-800 tracking-widest">
+                LONDON • NEW YORK • DUBAI
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Spotlight Effect Script
+        const container = document.getElementById("cards-container");
+        const cards = document.querySelectorAll(".spotlight-card");
+
+        container.onmousemove = e => {
+            for(const card of cards) {
+                const rect = card.getBoundingClientRect(),
+                      x = e.clientX - rect.left,
+                      y = e.clientY - rect.top;
+
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            };
+        }
+    </script>
+</body>
+</html>

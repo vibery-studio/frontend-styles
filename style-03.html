@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prism | Refract Your Ideas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        'glass-border': 'rgba(255, 255, 255, 0.2)',
+                        'glass-surface': 'rgba(255, 255, 255, 0.05)',
+                        'glass-surface-hover': 'rgba(255, 255, 255, 0.1)',
+                    },
+                    backgroundImage: {
+                        'aurora': 'linear-gradient(120deg, #2E1065, #7C3AED, #DB2777, #4F46E5)',
+                    },
+                    animation: {
+                        'aurora-move': 'aurora 20s ease infinite',
+                        'float': 'float 8s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        aurora: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.5' },
+                            '50%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-size: 400% 400%;
+            /* Deep, dark, rich background for the glass to pop against */
+            background-color: #0f172a; 
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-panel-heavy {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #fff, #b4b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Ambient Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="text-white antialiased min-h-screen relative overflow-x-hidden bg-slate-900 selection:bg-fuchsia-500 selection:text-white">
+
+    <!-- File Navigation Dropdown -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60]">
+        <select onchange="if(this.value) window.location.href=this.value" class="glass-panel-heavy text-white px-6 py-3 text-xs font-semibold border-2 border-purple-500/50 hover:border-fuchsia-500 hover:bg-purple-500/30 transition-all cursor-pointer rounded-full shadow-[0_8px_32px_rgba(139,92,246,0.3)]">
+            <option value="">🎨 Switch Style</option>
+            <option value="style-01.html">Refine AI</option>
+            <option value="style-02.html">Nook</option>
+            <option value="style-03.html" selected>Prism</option>
+            <option value="style-04.html">GRIT</option>
+            <option value="style-05.html">Dough</option>
+            <option value="style-06.html">Lumina</option>
+            <option value="style-07.html">NetRunner</option>
+            <option value="style-08.html">VANTAGE</option>
+            <option value="style-09.html">JOLT</option>
+            <option value="style-10.html">ONYX</option>
+            <option value="style-11.html">Gaia</option>
+            <option value="wild-01.html">Neon Vortex</option>
+            <option value="wild-02.html">MORPHIC</option>
+            <option value="skill.html">Master Index</option>
+        </select>
+    </div>
+
+    <!-- Ambient Animated Background Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="orb w-[50vw] h-[50vw] bg-purple-600/30 top-[-10%] left-[-10%] animate-pulse-glow"></div>
+        <div class="orb w-[40vw] h-[40vw] bg-blue-600/30 bottom-[-10%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="orb w-[30vw] h-[30vw] bg-pink-600/20 top-[40%] left-[30%] animate-pulse-glow" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 pt-6 px-6">
+        <div class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- Logo -->
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center backdrop-blur-md">
+                    <div class="w-4 h-4 bg-white rounded-sm rotate-45"></div>
+                </div>
+                <span class="font-bold text-lg tracking-wide">PRISM</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
+                <a href="#features" class="hover:text-white hover:scale-105 transition-all">Refraction</a>
+                <a href="#showcase" class="hover:text-white hover:scale-105 transition-all">Spectrum</a>
+                <a href="#pricing" class="hover:text-white hover:scale-105 transition-all">Crystal Access</a>
+            </div>
+
+            <button class="px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all font-semibold text-sm hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                Connect
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-screen flex flex-col justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
+            
+            <!-- Content -->
+            <div class="flex flex-col gap-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel w-fit border-white/20">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-white/80">Engine v4.0 Active</span>
+                </div>
+
+                <h1 class="text-6xl md:text-8xl font-bold leading-tight tracking-tight">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">Refract</span> your <br>
+                    imagination.
+                </h1>
+
+                <p class="text-xl text-blue-100/70 leading-relaxed max-w-lg border-l-2 border-white/20 pl-6">
+                    Turn a single sentence into a spectrum of creative assets. One prompt. Infinite creative dimensions.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <button class="px-8 py-4 rounded-2xl bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white font-bold text-lg shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300 border border-white/20">
+                        Start Refracting
+                    </button>
+                    <button class="px-8 py-4 rounded-2xl glass-panel hover:bg-white/10 font-bold text-lg transition-all flex items-center gap-3 group">
+                        See Gallery
+                        <span class="group-hover:translate-x-1 transition-transform">→</span>
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-4 mt-8 p-6 glass-panel rounded-2xl border-white/10">
+                    <div>
+                        <div class="text-2xl font-bold text-white">4.2s</div>
+                        <div class="text-xs text-white/50 uppercase tracking-wide">Render Time</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">8K</div>
+                        <div class="text-xs text-white/50 uppercase tracking-wide">Resolution</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">∞</div>
+                        <div class="text-xs text-white/50 uppercase tracking-wide">Possibilities</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glass Phone Mockup -->
+            <div class="relative h-[800px] flex items-center justify-center perspective-1000">
+                <!-- Background Glow behind phone -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500 via-purple-500 to-pink-500 opacity-30 blur-[100px] rounded-full"></div>
+
+                <!-- The Floating Phone -->
+                <div class="relative w-[340px] h-[680px] glass-panel-heavy rounded-[48px] p-4 animate-float z-20 overflow-hidden backdrop-blur-xl">
+                    <!-- Screen Container -->
+                    <div class="w-full h-full bg-black/40 rounded-[36px] overflow-hidden relative border border-white/10">
+                        
+                        <!-- UI Elements inside phone -->
+                        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-80" alt="Abstract Art">
+                        
+                        <!-- Floating Cards inside UI -->
+                        <div class="absolute bottom-6 left-4 right-4 flex flex-col gap-3">
+                            <!-- Input Field Mockup -->
+                            <div class="glass-panel p-4 rounded-xl flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-xs">✨</div>
+                                <div class="h-2 w-2/3 bg-white/30 rounded-full"></div>
+                            </div>
+                            <!-- Result Card -->
+                            <div class="glass-panel p-4 rounded-xl">
+                                <div class="flex justify-between mb-2">
+                                    <div class="h-2 w-1/3 bg-white/30 rounded-full"></div>
+                                    <div class="h-2 w-4 bg-green-400 rounded-full shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
+                                </div>
+                                <div class="h-20 w-full bg-gradient-to-br from-white/10 to-transparent rounded-lg border border-white/10"></div>
+                            </div>
+                        </div>
+
+                        <!-- Top Island -->
+                        <div class="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-7 bg-black/50 backdrop-blur-md rounded-full border border-white/10"></div>
+                    </div>
+                </div>
+
+                <!-- Decorative Elements floating around -->
+                <div class="absolute top-20 right-10 glass-panel p-4 rounded-2xl animate-float" style="animation-delay: 1s;">
+                    <div class="text-xs font-bold uppercase text-white/60 mb-1">Color Grade</div>
+                    <div class="w-32 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"></div>
+                </div>
+                <div class="absolute bottom-40 left-0 glass-panel p-4 rounded-2xl animate-float" style="animation-delay: 2s;">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                        <span class="text-sm font-bold">Render Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section - Glass Cards -->
+    <section id="features" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-glow">Crystal Clear Logic</h2>
+                <p class="text-white/60 max-w-2xl mx-auto">See through the noise. Our models are built on transparent reasoning layers.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-panel-heavy p-8 rounded-3xl group hover:bg-white/10 transition-all duration-500 hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-white/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Instant Refraction</h3>
+                    <p class="text-white/60 leading-relaxed">
+                        Split one prompt into text, image, audio, and code simultaneously.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-panel-heavy p-8 rounded-3xl group hover:bg-white/10 transition-all duration-500 hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-pink-500/20 border border-white/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-fuchsia-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Deep Layers</h3>
+                    <p class="text-white/60 leading-relaxed">
+                        Adjust the "opacity" of AI influence. From subtle edits to complete reimaging.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-panel-heavy p-8 rounded-3xl group hover:bg-white/10 transition-all duration-500 hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 border border-white/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-violet-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Crystalline Memory</h3>
+                    <p class="text-white/60 leading-relaxed">
+                        Prism remembers the context of your entire project, not just the last message.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Showcase / Parallax -->
+    <section id="showcase" class="py-24 relative overflow-hidden">
+        <!-- Horizontal Scroll Container -->
+        <div class="glass-panel border-x-0 border-white/10 py-16">
+            <div class="max-w-7xl mx-auto px-6 mb-12 flex justify-between items-end">
+                <div>
+                    <h2 class="text-3xl font-bold">The Spectrum</h2>
+                    <p class="text-white/50">Recent refractions from the community.</p>
+                </div>
+                <button class="text-sm font-bold uppercase tracking-widest hover:text-fuchsia-300 transition-colors">View All →</button>
+            </div>
+            
+            <div class="flex gap-8 overflow-x-auto pb-8 px-6 no-scrollbar snap-x">
+                <!-- Card 1 -->
+                <div class="min-w-[300px] md:min-w-[400px] aspect-[4/5] rounded-3xl overflow-hidden relative group snap-center cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Art">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 inset-x-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="glass-panel p-4 rounded-xl backdrop-blur-md">
+                            <p class="font-bold">Neon Kyoto</p>
+                            <p class="text-xs text-white/60">Generated via Image Refraction</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="min-w-[300px] md:min-w-[400px] aspect-[4/5] rounded-3xl overflow-hidden relative group snap-center cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1614850523060-8da1d56ae167?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Art">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 inset-x-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="glass-panel p-4 rounded-xl backdrop-blur-md">
+                            <p class="font-bold">Liquid Metal</p>
+                            <p class="text-xs text-white/60">Generated via 3D Refraction</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="min-w-[300px] md:min-w-[400px] aspect-[4/5] rounded-3xl overflow-hidden relative group snap-center cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Art">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 inset-x-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="glass-panel p-4 rounded-xl backdrop-blur-md">
+                            <p class="font-bold">Etherial Smoke</p>
+                            <p class="text-xs text-white/60">Generated via Motion Refraction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <h2 class="text-5xl font-bold mb-6">Polished Pricing.</h2>
+                    <p class="text-white/60 text-lg mb-8">
+                        No hidden fees. Full transparency. <br>
+                        Just like our interface.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">✓</div>
+                            <span class="font-medium">Unlimited Local Generations</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">✓</div>
+                            <span class="font-medium">4K Export Quality</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">✓</div>
+                            <span class="font-medium">Commercial License</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pricing Card -->
+                <div class="glass-panel-heavy p-10 rounded-[40px] relative overflow-hidden border-t border-white/30">
+                    <div class="absolute top-0 right-0 p-6">
+                        <div class="glass-panel px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-fuchsia-300">
+                            Most Loved
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-2">Prism Pro</h3>
+                    <div class="flex items-end gap-2 mb-8">
+                        <span class="text-6xl font-bold">$29</span>
+                        <span class="text-white/50 mb-2">/month</span>
+                    </div>
+
+                    <button class="w-full py-4 rounded-2xl bg-white text-black font-bold text-lg hover:bg-fuchsia-50 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                        Unlock Everything
+                    </button>
+                    
+                    <p class="text-center text-xs text-white/40 mt-6">
+                        7-day money-back guarantee. Cancel anytime.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10 bg-black/20 backdrop-blur-lg">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-white rounded-sm rotate-45"></div>
+                <span class="font-bold tracking-wide">PRISM</span>
+            </div>
+            
+            <div class="flex gap-8 text-sm text-white/50">
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Twitter</a>
+            </div>
+
+            <p class="text-xs text-white/30">© 2024 Prism Labs Inc.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

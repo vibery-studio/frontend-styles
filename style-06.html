@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina | Dream Architecture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Satoshi', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                        mono: ['Manrope', 'monospace'], // Using Manrope for technical numbers
+                    },
+                    colors: {
+                        'void': '#020617',
+                        'starlight': '#F8FAFC',
+                    },
+                    backgroundImage: {
+                        'aurora-mesh': 'radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%)',
+                    },
+                    animation: {
+                        'blob': 'blob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1)',
+                        'blob-reverse': 'blob-reverse 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1)',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'breathe': 'breathe 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'blob-reverse': {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '100%': { transform: 'translate(-50px, 50px) scale(1.2)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        breathe: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020617;
+            color: #F8FAFC;
+        }
+
+        /* The Aurora Mesh Logic */
+        .aurora-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: #020617;
+        }
+
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+        }
+
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #4F46E5; animation-delay: 0s; } /* Indigo */
+        .blob-2 { top: -10%; right: -10%; width: 40vw; height: 40vw; background: #C026D3; animation-delay: 2s; } /* Fuchsia */
+        .blob-3 { bottom: -20%; left: 20%; width: 60vw; height: 60vw; background: #0891B2; animation-delay: 4s; } /* Cyan */
+        .blob-4 { bottom: -10%; right: -10%; width: 30vw; height: 30vw; background: #BE185D; animation-delay: 6s; } /* Rose */
+
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.5);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .mesh-text {
+            background: linear-gradient(to right bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-fuchsia-500 selection:text-white">
+
+    <!-- File Navigation Dropdown -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60]">
+        <select onchange="if(this.value) window.location.href=this.value" class="bg-slate-900/80 backdrop-blur-md text-white px-6 py-3 text-xs font-semibold border-2 border-fuchsia-500/50 hover:border-fuchsia-500 hover:bg-fuchsia-500/30 transition-all cursor-pointer rounded-full shadow-[0_8px_32px_rgba(217,70,239,0.3)]">
+            <option value="">🎨 Switch Style</option>
+            <option value="style-01.html">Refine AI</option>
+            <option value="style-02.html">Nook</option>
+            <option value="style-03.html">Prism</option>
+            <option value="style-04.html">GRIT</option>
+            <option value="style-05.html">Dough</option>
+            <option value="style-06.html" selected>Lumina</option>
+            <option value="style-07.html">NetRunner</option>
+            <option value="style-08.html">VANTAGE</option>
+            <option value="style-09.html">JOLT</option>
+            <option value="style-10.html">ONYX</option>
+            <option value="style-11.html">Gaia</option>
+            <option value="wild-01.html">Neon Vortex</option>
+            <option value="wild-02.html">MORPHIC</option>
+            <option value="skill.html">Master Index</option>
+        </select>
+    </div>
+
+    <!-- Active Background -->
+    <div class="aurora-container">
+        <div class="aurora-blob blob-1 animate-blob"></div>
+        <div class="aurora-blob blob-2 animate-blob-reverse"></div>
+        <div class="aurora-blob blob-3 animate-blob"></div>
+        <div class="aurora-blob blob-4 animate-blob-reverse"></div>
+        <!-- Grain Overlay -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="font-serif italic text-3xl tracking-tighter text-white hover:opacity-80 transition-opacity">
+                Lumina.
+            </a>
+            
+            <div class="hidden md:flex items-center gap-12 font-sans text-sm tracking-widest uppercase text-white/60">
+                <a href="#rem" class="hover:text-white transition-colors hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] duration-300">Cycles</a>
+                <a href="#lucid" class="hover:text-white transition-colors hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] duration-300">Lucidity</a>
+                <a href="#sounds" class="hover:text-white transition-colors hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] duration-300">Soundscapes</a>
+            </div>
+
+            <button class="px-8 py-2 rounded-full border border-white/20 hover:bg-white/10 hover:border-white/40 transition-all font-sans text-xs tracking-[0.2em] uppercase">
+                Enter Sleep
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="min-h-screen flex items-center relative pt-20 overflow-hidden">
+        <div class="max-w-[1400px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left: Text -->
+            <div class="lg:col-span-7 flex flex-col justify-center relative z-10">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="w-12 h-[1px] bg-gradient-to-r from-cyan-400 to-transparent"></span>
+                    <span class="font-sans text-xs tracking-[0.3em] uppercase text-cyan-200/80">AI Dream Recorder</span>
+                </div>
+
+                <h1 class="font-serif text-7xl md:text-8xl lg:text-9xl leading-[0.9] text-white mb-8 mix-blend-overlay opacity-90">
+                    Map the <br> 
+                    <i class="font-light text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-300 via-purple-300 to-cyan-300">Subconscious.</i>
+                </h1>
+
+                <p class="font-sans font-light text-lg md:text-xl text-white/60 max-w-lg leading-relaxed mb-12">
+                    Lumina listens to your sleep bio-rhythms and generates a visual tapestry of your dreams. Wake up to art created by your mind.
+                </p>
+
+                <div class="flex items-center gap-8">
+                    <button class="group relative px-8 py-4 bg-white text-black font-sans font-medium rounded-full overflow-hidden">
+                        <span class="relative z-10 flex items-center gap-2">
+                            Download Beta 
+                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-200 to-fuchsia-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </button>
+                    
+                    <button class="flex items-center gap-4 group">
+                        <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-cyan-400/50 transition-colors">
+                            <svg class="w-4 h-4 text-white fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span class="font-sans text-sm tracking-widest uppercase text-white/60 group-hover:text-white transition-colors">Watch Demo</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: The "Portal" Mockup -->
+            <div class="lg:col-span-5 relative h-[700px] flex items-center justify-center">
+                <!-- Glowing Aura behind phone -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[600px] bg-gradient-to-b from-cyan-500/20 to-purple-500/20 blur-3xl rounded-[100px] animate-breathe"></div>
+
+                <!-- Phone -->
+                <div class="relative w-[340px] h-[680px] rounded-[50px] border border-white/10 bg-black/40 backdrop-blur-xl shadow-2xl overflow-hidden z-20 animate-float-slow">
+                    <!-- Screen -->
+                    <div class="absolute inset-[4px] rounded-[46px] overflow-hidden bg-[#05050A]">
+                        <!-- Dynamic Background inside phone -->
+                        <div class="absolute inset-0 opacity-60">
+                             <div class="absolute top-[-20%] left-[-20%] w-[150%] h-[100%] bg-gradient-to-br from-indigo-900 via-purple-900 to-black blur-[60px] animate-blob"></div>
+                        </div>
+
+                        <!-- UI Content -->
+                        <div class="relative z-10 h-full flex flex-col justify-between p-8">
+                            <!-- Header -->
+                            <div class="flex justify-between items-center text-white/50">
+                                <span class="text-xs tracking-widest uppercase">06:42 AM</span>
+                                <div class="w-12 h-6 rounded-full border border-white/20 relative">
+                                    <div class="absolute top-1 left-1 w-4 h-4 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]"></div>
+                                </div>
+                            </div>
+
+                            <!-- Center Visualization -->
+                            <div class="flex flex-col items-center text-center">
+                                <h3 class="font-serif text-3xl italic text-white mb-2">REM Phase</h3>
+                                <p class="text-xs text-white/40 tracking-widest uppercase mb-12">Deep Lucidity</p>
+                                
+                                <!-- Animated Waveform/Circle -->
+                                <div class="w-48 h-48 rounded-full border border-white/10 flex items-center justify-center relative">
+                                    <div class="absolute inset-0 rounded-full border border-cyan-500/30 animate-[ping_3s_linear_infinite]"></div>
+                                    <div class="absolute inset-4 rounded-full border border-purple-500/30 animate-[ping_4s_linear_infinite]"></div>
+                                    <div class="w-32 h-32 rounded-full bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 backdrop-blur-md flex items-center justify-center">
+                                        <span class="font-mono text-2xl text-white">94%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Controls -->
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="h-16 rounded-2xl bg-white/5 backdrop-blur-sm flex flex-col items-center justify-center border border-white/5">
+                                    <span class="text-xs text-white/40 mb-1">HRV</span>
+                                    <span class="font-mono text-white">42ms</span>
+                                </div>
+                                <div class="h-16 rounded-2xl bg-white/10 backdrop-blur-md flex flex-col items-center justify-center border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                                    <div class="w-2 h-2 rounded-full bg-red-400 mb-1 animate-pulse"></div>
+                                    <span class="text-[10px] text-white/60 uppercase">Rec</span>
+                                </div>
+                                <div class="h-16 rounded-2xl bg-white/5 backdrop-blur-sm flex flex-col items-center justify-center border border-white/5">
+                                    <span class="text-xs text-white/40 mb-1">Temp</span>
+                                    <span class="font-mono text-white">98°</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Section: Flowing Layout -->
+    <section class="py-32 relative z-10">
+        <!-- Section Header -->
+        <div class="max-w-[1400px] mx-auto px-6 mb-24">
+            <h2 class="font-serif text-5xl md:text-6xl text-white max-w-2xl leading-tight">
+                <span class="opacity-50">Sleep is not a gap.</span> <br>
+                It is a canvas.
+            </h2>
+        </div>
+
+        <!-- Horizontal Scroll / Features -->
+        <div class="relative w-full overflow-x-hidden">
+            <div class="flex flex-col gap-32 max-w-[1400px] mx-auto px-6">
+                
+                <!-- Feature 1: Right Aligned -->
+                <div class="flex flex-col md:flex-row items-center gap-16 md:ml-24">
+                    <div class="w-full md:w-1/2 relative group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200&auto=format&fit=crop" class="relative z-10 rounded-none w-full h-[400px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100" alt="Aurora">
+                        <div class="absolute -bottom-6 -left-6 w-24 h-24 border border-white/20 rounded-full flex items-center justify-center z-20 backdrop-blur-md">
+                            <span class="font-mono text-xs">01</span>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <h3 class="font-sans text-xs tracking-[0.3em] text-cyan-200 uppercase mb-4">Dream Mapping</h3>
+                        <h4 class="font-serif text-4xl text-white mb-6">Visualizing the unseen.</h4>
+                        <p class="text-white/60 leading-relaxed font-light max-w-sm">
+                            Using advanced localized LLMs, we translate your sleep talk and bio-feedback into abstract generative art. Every night creates a new gallery piece.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Left Aligned -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-16 md:mr-24">
+                    <div class="w-full md:w-1/2 relative group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-fuchsia-500 to-purple-500 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" class="relative z-10 rounded-none w-full h-[400px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100" alt="Abstract">
+                        <div class="absolute -bottom-6 -right-6 w-24 h-24 border border-white/20 rounded-full flex items-center justify-center z-20 backdrop-blur-md">
+                            <span class="font-mono text-xs">02</span>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 text-right">
+                        <h3 class="font-sans text-xs tracking-[0.3em] text-fuchsia-200 uppercase mb-4">Sonic Induction</h3>
+                        <h4 class="font-serif text-4xl text-white mb-6">Frequencies that float.</h4>
+                        <p class="text-white/60 leading-relaxed font-light max-w-sm ml-auto">
+                            Binaural beats that adapt in real-time to your heart rate variability. Drift into Delta waves seamlessly.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Membership -->
+    <section class="py-32 px-6 relative overflow-hidden">
+        <!-- Mesh Background Localized -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-[1000px] mx-auto relative z-10 text-center">
+            <span class="font-serif italic text-2xl text-white/50 mb-8 block">Join the Collective</span>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10 overflow-hidden rounded-3xl">
+                <!-- Free -->
+                <div class="bg-[#020617] p-12 hover:bg-white/5 transition-colors group">
+                    <h3 class="font-sans text-sm tracking-widest uppercase text-white/40 mb-4">Observer</h3>
+                    <div class="font-serif text-5xl text-white mb-8">Free</div>
+                    <ul class="text-left space-y-4 text-white/60 font-light mb-12 text-sm pl-8">
+                        <li class="list-disc">Basic Sleep Tracking</li>
+                        <li class="list-disc">3 Dream Visualizations / Mo</li>
+                        <li class="list-disc">Standard Alarm</li>
+                    </ul>
+                    <a href="#" class="inline-block border-b border-white/20 pb-1 text-white hover:border-white transition-colors text-xs tracking-widest uppercase">Begin Journey</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="bg-[#020617] p-12 relative overflow-hidden hover:bg-white/5 transition-colors group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/20 blur-[50px] rounded-full"></div>
+                    
+                    <h3 class="font-sans text-sm tracking-widest uppercase text-cyan-200 mb-4">Lucid</h3>
+                    <div class="font-serif text-5xl text-white mb-8">$12<span class="text-lg opacity-50">/mo</span></div>
+                    <ul class="text-left space-y-4 text-white/80 font-light mb-12 text-sm pl-8">
+                        <li class="list-disc marker:text-cyan-400">Unlimited Neural Art</li>
+                        <li class="list-disc marker:text-cyan-400">Full Audio Soundscapes</li>
+                        <li class="list-disc marker:text-cyan-400">Export to 8K</li>
+                        <li class="list-disc marker:text-cyan-400">Smart Wake-Up</li>
+                    </ul>
+                    <button class="w-full py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-lg text-white font-sans text-xs tracking-widest uppercase transition-all">
+                        Unlock Full Access
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 px-6 border-t border-white/5">
+        <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-end gap-12">
+            <div>
+                <h2 class="font-serif text-6xl text-white mb-4">Lumina.</h2>
+                <p class="text-white/40 text-sm font-light max-w-xs">
+                    Designed for the night. <br>
+                    Built in Reykjavik.
+                </p>
+            </div>
+
+            <div class="flex gap-12">
+                <div class="flex flex-col gap-4 text-xs tracking-widest uppercase text-white/40">
+                    <span class="text-white">Platform</span>
+                    <a href="#" class="hover:text-cyan-200 transition-colors">iOS</a>
+                    <a href="#" class="hover:text-cyan-200 transition-colors">Android</a>
+                    <a href="#" class="hover:text-cyan-200 transition-colors">Vision Pro</a>
+                </div>
+                <div class="flex flex-col gap-4 text-xs tracking-widest uppercase text-white/40">
+                    <span class="text-white">Legal</span>
+                    <a href="#" class="hover:text-cyan-200 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-cyan-200 transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

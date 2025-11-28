@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Vortex | Immersive Experience</title>
+    <!-- Tailwind CSS for layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #050505;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        /* 3D Background */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Behind everything */
+            display: block;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-glass {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Typography & Effects */
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .neon-border:hover {
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+            border-color: rgba(255, 0, 255, 0.6);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ffff;
+        }
+
+        /* Animations */
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: monospace;
+            z-index: 50;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- File Navigation Dropdown -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60]">
+        <select onchange="if(this.value) window.location.href=this.value" class="bg-gray-900/95 backdrop-blur text-cyan-400 px-6 py-3 text-xs font-mono border-2 border-cyan-400 hover:bg-cyan-400 hover:text-gray-900 transition-all cursor-pointer rounded-full shadow-[0_0_40px_rgba(34,211,238,0.7)]">
+            <option value="">🎨 Switch Style</option>
+            <option value="style-01.html">Refine AI</option>
+            <option value="style-02.html">Nook</option>
+            <option value="style-03.html">Prism</option>
+            <option value="style-04.html">GRIT</option>
+            <option value="style-05.html">Dough</option>
+            <option value="style-06.html">Lumina</option>
+            <option value="style-07.html">NetRunner</option>
+            <option value="style-08.html">VANTAGE</option>
+            <option value="style-09.html">JOLT</option>
+            <option value="style-10.html">ONYX</option>
+            <option value="style-11.html">Gaia</option>
+            <option value="wild-01.html" selected>Neon Vortex</option>
+            <option value="wild-02.html">MORPHIC</option>
+            <option value="skill.html">Master Index</option>
+        </select>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading" class="text-xl tracking-widest text-cyan-400">INITIALIZING CORE...</div>
+
+    <!-- 3D Canvas Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 nav-glass transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold tracking-wider text-white neon-text cursor-pointer">NEON<span class="text-cyan-400">VORTEX</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#hero" class="text-white hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Experience</a>
+                        <a href="#about" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#features" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Tech</a>
+                        <a href="#contact" class="px-4 py-2 rounded-full border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all text-sm font-bold">Connect</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen flex items-center justify-center text-center px-4">
+            <div class="fade-in-up">
+                <h1 class="text-5xl md:text-7xl font-light tracking-[0.2em] mb-4 text-white">
+                    DIGITAL <span class="font-bold text-cyan-400 neon-text">HORIZON</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 tracking-widest mb-8 max-w-2xl mx-auto">
+                    INTERACTIVE 3D WEB EXPERIENCES
+                </p>
+                <div class="text-sm text-gray-500 tracking-widest animate-pulse">
+                    SCROLL TO EXPLORE
+                </div>
+            </div>
+            
+            <!-- Interactive Hint -->
+            <div class="absolute bottom-10 left-0 w-full text-center pointer-events-none">
+                <p class="text-xs text-gray-600 tracking-[0.3em] uppercase">
+                    Click & Hold Background to Warp
+                </p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="min-h-screen flex items-center py-20 px-4">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="glass-panel p-8 rounded-2xl neon-border transition-all duration-300">
+                    <h2 class="text-3xl font-bold mb-4 text-white">The Core System</h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Neon Vortex isn't just a visual loop; it's a procedural simulation running in real-time. Every particle is calculated individually, creating a unique nebula that responds to your input.
+                    </p>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></span>2,500 Interactive Particles</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-magenta-500 bg-pink-500 rounded-full mr-3"></span>Dynamic Lighting Engine</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>Responsive 3D Camera</li>
+                    </ul>
+                </div>
+                <div class="text-right hidden md:block">
+                    <h3 class="text-6xl font-black text-white opacity-10">01</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section id="features" class="min-h-screen py-20 px-4 bg-gradient-to-b from-transparent to-black/80">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-16 neon-text">Capabilities</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors neon-border">
+                        <div class="w-12 h-12 bg-cyan-900/50 rounded-lg flex items-center justify-center mb-4 text-cyan-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">WebGL Powered</h3>
+                        <p class="text-sm text-gray-400">Built on Three.js for hardware-accelerated graphics that run smoothly in the browser without plugins.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors neon-border">
+                        <div class="w-12 h-12 bg-pink-900/50 rounded-lg flex items-center justify-center mb-4 text-pink-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">High Performance</h3>
+                        <p class="text-sm text-gray-400">Optimized geometry and shader materials ensure 60fps performance across devices.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors neon-border">
+                        <div class="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-4 text-blue-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Fully Responsive</h3>
+                        <p class="text-sm text-gray-400">The 3D viewport intelligently resizes and adjusts FOV for mobile, tablet, and desktop screens.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Footer -->
+        <section id="contact" class="py-20 px-4 bg-black border-t border-gray-900">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-light mb-8">Ready to <span class="text-cyan-400">Warp?</span></h2>
+                <div class="glass-panel p-8 rounded-2xl inline-block w-full max-w-md">
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Transmission Sent.');">
+                        <input type="email" placeholder="Enter your email" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors">
+                        <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)]">
+                            Join the Network
+                        </button>
+                    </form>
+                </div>
+                <div class="mt-12 text-gray-600 text-sm">
+                    &copy; 2024 Neon Vortex Systems. All systems operational.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Import Three.js from a CDN -->
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+        // --- Configuration ---
+        const CONFIG = {
+            particleCount: 2500,
+            particleSize: 0.08,
+            ringRadius: 5,
+            coreSize: 1.5,
+            colors: [0x00ffff, 0xff00ff, 0x4d4dff], // Cyan, Magenta, Blue
+            cameraZ: 12
+        };
+
+        // --- Global Variables ---
+        let scene, camera, renderer;
+        let particles, particleGeo, particleMaterial;
+        let coreMesh, ringMesh1, ringMesh2;
+        let mouseX = 0, mouseY = 0;
+        let isWarping = false;
+        let time = 0;
+
+        // --- Initialization ---
+        function init() {
+            const container = document.getElementById('canvas-container');
+            const loading = document.getElementById('loading');
+
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x050505, 0.035); // Atmospheric fog
+
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = CONFIG.cameraZ;
+
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // 1. The Energy Core (Icosahedron)
+            const coreGeometry = new THREE.IcosahedronGeometry(CONFIG.coreSize, 1);
+            const coreMaterial = new THREE.MeshPhongMaterial({ 
+                color: 0x00ffff, 
+                emissive: 0x0044aa,
+                emissiveIntensity: 0.8,
+                shininess: 100,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.9
+            });
+            coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
+            scene.add(coreMesh);
+
+            // Internal glow for core
+            const innerCoreGeo = new THREE.IcosahedronGeometry(CONFIG.coreSize * 0.6, 2);
+            const innerCoreMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: false });
+            const innerCore = new THREE.Mesh(innerCoreGeo, innerCoreMat);
+            coreMesh.add(innerCore);
+
+            // 2. Orbital Rings
+            const ringGeo = new THREE.TorusGeometry(CONFIG.ringRadius, 0.05, 16, 100);
+            const ringMat = new THREE.MeshBasicMaterial({ color: 0xff00ff, transparent: true, opacity: 0.3, wireframe: true });
+            
+            ringMesh1 = new THREE.Mesh(ringGeo, ringMat);
+            ringMesh2 = new THREE.Mesh(ringGeo, ringMat);
+            
+            ringMesh1.rotation.x = Math.PI / 2; // Flat
+            ringMesh2.rotation.x = Math.PI / 2; 
+            ringMesh2.rotation.y = Math.PI / 4; // Tilted
+
+            scene.add(ringMesh1);
+            scene.add(ringMesh2);
+
+            // 3. The Particle System (The Vortex)
+            particleGeo = new THREE.BufferGeometry();
+            const positions = [];
+            const colors = [];
+            const speeds = []; // Custom attribute for movement speed
+
+            const colorObj = new THREE.Color();
+
+            for (let i = 0; i < CONFIG.particleCount; i++) {
+                // Spherical distribution with a twist
+                const radius = 2 + Math.random() * 15;
+                const angle = Math.random() * Math.PI * 2;
+                const height = (Math.random() - 0.5) * (radius * 0.8); // Flattened disk shape
+
+                const x = Math.cos(angle) * radius;
+                const y = height;
+                const z = Math.sin(angle) * radius;
+
+                positions.push(x, y, z);
+
+                // Assign random colors from our palette
+                const colorHex = CONFIG.colors[Math.floor(Math.random() * CONFIG.colors.length)];
+                colorObj.setHex(colorHex);
+                colors.push(colorObj.r, colorObj.g, colorObj.b);
+
+                // Speed factor for animation
+                speeds.push(Math.random());
+            }
+
+            particleGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            particleGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+            particleGeo.setAttribute('velocity', new THREE.Float32BufferAttribute(speeds, 1));
+
+            // Create a generated texture for the particles (soft glow)
+            const sprite = generateSprite();
+
+            particleMaterial = new THREE.PointsMaterial({
+                size: CONFIG.particleSize,
+                map: sprite,
+                vertexColors: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            particles = new THREE.Points(particleGeo, particleMaterial);
+            scene.add(particles);
+
+            // 4. Lights
+            const ambientLight = new THREE.AmbientLight(0x000000);
+            scene.add(ambientLight);
+
+            const pointLight1 = new THREE.PointLight(0x00ffff, 2, 50);
+            pointLight1.position.set(0, 0, 0);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0xff00ff, 1, 50);
+            pointLight2.position.set(10, 10, 10);
+            scene.add(pointLight2);
+
+            // Event Listeners
+            window.addEventListener('resize', onWindowResize, false);
+            document.addEventListener('mousemove', onDocumentMouseMove, false);
+            
+            // Interaction logic: Only warp if clicking on the background (body or canvas)
+            // We use pointer events on the overlay sections to ensure forms work.
+            document.addEventListener('mousedown', (e) => {
+                if(e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
+                    isWarping = true;
+                }
+            }, false);
+            
+            document.addEventListener('mouseup', () => isWarping = false, false);
+            document.addEventListener('touchstart', (e) => {
+                 if(e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
+                    isWarping = true;
+                }
+            }, {passive: true});
+            document.addEventListener('touchend', () => isWarping = false, {passive: true});
+
+            // Start loop
+            loading.style.display = 'none';
+            animate();
+        }
+
+        // --- Helper: Create a glowing dot texture programmatically ---
+        function generateSprite() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 32;
+            canvas.height = 32;
+            const context = canvas.getContext('2d');
+            const gradient = context.createRadialGradient(16, 16, 0, 16, 16, 16);
+            gradient.addColorStop(0, 'rgba(255,255,255,1)');
+            gradient.addColorStop(0.2, 'rgba(255,255,255,0.8)');
+            gradient.addColorStop(0.5, 'rgba(255,255,255,0.2)');
+            gradient.addColorStop(1, 'rgba(0,0,0,0)');
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, 32, 32);
+            
+            const texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            return texture;
+        }
+
+        // --- Interaction ---
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.001;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.001;
+        }
+
+        // --- Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+
+            time += 0.005;
+
+            // 1. Camera Movement (Smooth parallax based on mouse)
+            // We dampen this slightly so it's not too jittery while scrolling
+            const targetRotationX = mouseY * 1.5;
+            const targetRotationY = mouseX * 1.5;
+            
+            scene.rotation.x += 0.05 * (targetRotationX - scene.rotation.x);
+            scene.rotation.y += 0.05 * (targetRotationY - scene.rotation.y);
+
+            // 2. Core Animation
+            coreMesh.rotation.x += 0.01;
+            coreMesh.rotation.y += 0.015;
+            
+            const scale = 1 + Math.sin(time * 3) * 0.1;
+            coreMesh.scale.set(scale, scale, scale);
+
+            // 3. Ring Animation
+            ringMesh1.rotation.z -= 0.005;
+            ringMesh1.rotation.x = (Math.PI / 2) + Math.sin(time) * 0.2;
+            
+            ringMesh2.rotation.z += 0.005;
+            ringMesh2.rotation.y += Math.cos(time * 0.5) * 0.005;
+
+            // 4. Particle Animation
+            const positions = particles.geometry.attributes.position.array;
+            const velocities = particles.geometry.attributes.velocity.array;
+            
+            // Warp Speed Logic
+            let speedMultiplier = isWarping ? 8 : 1;
+            if (isWarping) {
+                camera.position.z += (8 - camera.position.z) * 0.05; 
+                scene.fog.density = 0.02; 
+                particleMaterial.size = CONFIG.particleSize * 0.5;
+            } else {
+                camera.position.z += (CONFIG.cameraZ - camera.position.z) * 0.05; 
+                scene.fog.density = 0.035;
+                particleMaterial.size = CONFIG.particleSize;
+            }
+
+            for (let i = 0; i < CONFIG.particleCount; i++) {
+                const i3 = i * 3;
+                
+                const x = positions[i3];
+                const y = positions[i3 + 1];
+                const z = positions[i3 + 2];
+
+                const speed = 0.002 * (1 + velocities[i]) * speedMultiplier;
+                
+                const cosS = Math.cos(speed);
+                const sinS = Math.sin(speed);
+
+                positions[i3] = x * cosS - z * sinS; 
+                positions[i3 + 2] = x * sinS + z * cosS; 
+
+                positions[i3 + 1] += Math.sin(time + x * 0.5) * 0.01;
+            }
+
+            particles.geometry.attributes.position.needsUpdate = true;
+
+            // 5. Render
+            renderer.render(scene, camera);
+        }
+
+        // Boot
+        init();
+
+    </script>
+</body>
+</html>

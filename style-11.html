@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaia | Return to Nature</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                        serif: ['Philosopher', 'serif'],
+                    },
+                    colors: {
+                        'gaia-bg': '#F9F7F2',
+                        'gaia-moss': '#2D382B',
+                        'gaia-sage': '#8DA399',
+                        'gaia-clay': '#D6C0B3',
+                        'gaia-sand': '#EBE5CE',
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.4%22/%3E%3C/svg%3E')",
+                    },
+                    animation: {
+                        'morph': 'morph 15s ease-in-out infinite',
+                        'morph-fast': 'morph 8s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'breathe': 'breathe 8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        morph: {
+                            '0%, 100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+                            '50%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        breathe: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F9F7F2;
+            color: #2D382B;
+        }
+
+        /* Gooey Effect Container */
+        .gooey-filter {
+            filter: url('#goo');
+        }
+
+        /* Organic Button */
+        .btn-organic {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            transition: all 0.5s ease;
+        }
+        .btn-organic:hover {
+            border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+            transform: scale(1.05);
+        }
+
+        /* Pebble Card Shape */
+        .pebble {
+            border-radius: 40px 60px 50px 40px / 50px 40px 60px 50px;
+        }
+
+        /* Text selection color */
+        ::selection {
+            background: #8DA399;
+            color: #F9F7F2;
+        }
+
+        /* Smooth out the morphing mask */
+        .smooth-morph {
+            transition: border-radius 1s ease-in-out;
+            will-change: border-radius;
+            transform: translateZ(0); /* Hardware accelerate */
+        }
+        
+        /* Ensure animation pauses cleanly without jump */
+        .hover-pause:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <!-- File Navigation Dropdown -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60]">
+        <select onchange="if(this.value) window.location.href=this.value" class="bg-white/95 backdrop-blur text-amber-900 px-6 py-3 text-xs font-serif border-2 border-amber-900 hover:bg-amber-900 hover:text-white transition-all cursor-pointer rounded-full shadow-lg">
+            <option value="">🎨 Switch Style</option>
+            <option value="style-01.html">Refine AI</option>
+            <option value="style-02.html">Nook</option>
+            <option value="style-03.html">Prism</option>
+            <option value="style-04.html">GRIT</option>
+            <option value="style-05.html">Dough</option>
+            <option value="style-06.html">Lumina</option>
+            <option value="style-07.html">NetRunner</option>
+            <option value="style-08.html">VANTAGE</option>
+            <option value="style-09.html">JOLT</option>
+            <option value="style-10.html">ONYX</option>
+            <option value="style-11.html" selected>Gaia</option>
+            <option value="wild-01.html">Neon Vortex</option>
+            <option value="wild-02.html">MORPHIC</option>
+            <option value="skill.html">Master Index</option>
+        </select>
+    </div>
+
+    <!-- Paper Grain Texture Overlay -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.08] mix-blend-multiply z-50 bg-noise"></div>
+
+    <!-- SVG Filters (Hidden) -->
+    <svg style="visibility: hidden; position: absolute;" width="0" height="0">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 top-0 pt-6 px-6">
+        <div class="max-w-[1400px] mx-auto bg-white/60 backdrop-blur-md rounded-[50px] px-8 py-4 flex justify-between items-center shadow-sm border border-white/40">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gaia-sage rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] animate-morph-fast flex items-center justify-center text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <span class="font-serif font-bold text-2xl text-gaia-moss">Gaia</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 font-sans font-bold text-gaia-moss/70">
+                <a href="#mission" class="hover:text-gaia-moss transition-colors">Our Roots</a>
+                <a href="#impact" class="hover:text-gaia-moss transition-colors">Impact</a>
+                <a href="#community" class="hover:text-gaia-moss transition-colors">Garden</a>
+            </div>
+
+            <button class="bg-gaia-moss text-gaia-bg font-sans font-bold px-8 py-3 btn-organic shadow-lg shadow-gaia-moss/20">
+                Join the Cycle
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen relative flex items-center pt-24 pb-32 overflow-hidden bg-gaia-bg">
+        
+        <!-- Organic Background Blobs -->
+        <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-gaia-sage/20 mix-blend-multiply filter blur-3xl animate-morph z-0"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-gaia-clay/20 mix-blend-multiply filter blur-3xl animate-morph z-0" style="animation-delay: -5s;"></div>
+        <div class="absolute top-[20%] right-[10%] w-[30vw] h-[30vw] bg-gaia-sand mix-blend-multiply filter blur-2xl animate-morph z-0" style="animation-delay: -10s;"></div>
+
+        <div class="max-w-[1400px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+            
+            <!-- Left: Text -->
+            <div class="flex flex-col gap-8 order-2 lg:order-1">
+                <div class="inline-flex items-center gap-3 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full w-fit border border-gaia-sage/20">
+                    <span class="w-3 h-3 bg-gaia-sage rounded-full animate-pulse"></span>
+                    <span class="font-sans text-sm font-bold text-gaia-moss/80">Reconnecting with Earth</span>
+                </div>
+
+                <h1 class="font-serif text-6xl md:text-8xl text-gaia-moss leading-[0.9]">
+                    Grow with <br>
+                    <span class="italic text-gaia-sage">Intention.</span>
+                </h1>
+
+                <p class="font-sans text-xl text-gaia-moss/70 leading-relaxed max-w-lg">
+                    A digital companion for your sustainable journey. Track your carbon footprint, nurture your local ecosystem, and bloom.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mt-4">
+                    <button class="bg-gaia-clay text-white font-sans font-bold text-lg px-10 py-5 btn-organic shadow-xl shadow-gaia-clay/30 flex items-center gap-3 group">
+                        Plant a Seed
+                        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </button>
+                    <div class="flex items-center gap-4 px-6">
+                        <div class="flex -space-x-3">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-full border-4 border-gaia-bg object-cover" alt="User">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-full border-4 border-gaia-bg object-cover" alt="User">
+                            <div class="w-12 h-12 rounded-full border-4 border-gaia-bg bg-gaia-sand flex items-center justify-center font-bold text-gaia-moss text-xs">
+                                +2k
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-gaia-moss/60">Guardians active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Organic Image Mask -->
+            <div class="order-1 lg:order-2 relative flex justify-center group">
+                <div class="relative w-[400px] h-[500px] animate-float">
+                    <!-- The Image Blob with optimized hover pause -->
+                    <div class="smooth-morph absolute inset-0 overflow-hidden animate-morph hover-pause shadow-2xl shadow-gaia-sage/20" style="border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;">
+                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1.5s] ease-out" alt="Nature">
+                        
+                        <!-- Floating UI Badge on Image -->
+                        <div class="absolute bottom-10 right-10 bg-white/80 backdrop-blur-md p-4 rounded-[20px] shadow-lg max-w-[150px]">
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                <span class="text-[10px] uppercase font-bold text-gaia-moss">Air Quality</span>
+                            </div>
+                            <div class="text-2xl font-serif font-bold text-gaia-moss">98%</div>
+                            <div class="text-xs text-gaia-moss/60">Excellent</div>
+                        </div>
+                    </div>
+
+                    <!-- Decorative Orbiting Elements -->
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-gaia-sand rounded-full mix-blend-multiply blur-xl animate-pulse"></div>
+                    <div class="absolute top-1/2 -left-12 w-20 h-20 bg-gaia-clay rounded-full mix-blend-multiply blur-xl animate-pulse" style="animation-delay: 1s;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave: Beige to White (Corrected Position & Rotation) -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-[calc(100%+1.3px)] h-16 md:h-24 lg:h-32 transform rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Features Section: Pebble Cards -->
+    <section id="mission" class="bg-white pt-24 pb-48 px-6 relative">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="font-serif text-5xl text-gaia-moss mb-6">Harmonize with nature.</h2>
+                <p class="font-sans text-lg text-gaia-moss/60 max-w-2xl mx-auto">
+                    Small, daily ripples create waves of change. Our tools are designed to integrate seamlessly into your natural rhythm.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pebble 1 -->
+                <div class="pebble bg-gaia-bg p-10 hover:bg-gaia-sand/30 transition-colors duration-500 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-gaia-sage/10 rounded-full blur-2xl group-hover:bg-gaia-sage/20 transition-colors"></div>
+                    <div class="w-16 h-16 bg-white rounded-[20px_40px_30px_50px] shadow-sm flex items-center justify-center text-3xl mb-6 text-gaia-sage group-hover:scale-110 transition-transform">🌱</div>
+                    <h3 class="font-serif text-2xl font-bold text-gaia-moss mb-4">Carbon Tracking</h3>
+                    <p class="font-sans text-gaia-moss/70 leading-relaxed">Visualize your footprint as a living garden. Watch it wither with excess or bloom with reduction.</p>
+                </div>
+
+                <!-- Pebble 2 -->
+                <div class="pebble bg-gaia-bg p-10 hover:bg-gaia-clay/20 transition-colors duration-500 group cursor-pointer relative overflow-hidden mt-0 md:mt-12">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-gaia-clay/10 rounded-full blur-2xl group-hover:bg-gaia-clay/20 transition-colors"></div>
+                    <div class="w-16 h-16 bg-white rounded-[40px_20px_50px_30px] shadow-sm flex items-center justify-center text-3xl mb-6 text-gaia-clay group-hover:scale-110 transition-transform">🍂</div>
+                    <h3 class="font-serif text-2xl font-bold text-gaia-moss mb-4">Seasonal Eating</h3>
+                    <p class="font-sans text-gaia-moss/70 leading-relaxed">Recipes that align with local harvest cycles. Reduce transport emissions, maximize nutrition.</p>
+                </div>
+
+                <!-- Pebble 3 -->
+                <div class="pebble bg-gaia-bg p-10 hover:bg-gaia-moss/10 transition-colors duration-500 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-gaia-moss/5 rounded-full blur-2xl group-hover:bg-gaia-moss/10 transition-colors"></div>
+                    <div class="w-16 h-16 bg-white rounded-[30px_50px_20px_40px] shadow-sm flex items-center justify-center text-3xl mb-6 text-gaia-moss group-hover:scale-110 transition-transform">💧</div>
+                    <h3 class="font-serif text-2xl font-bold text-gaia-moss mb-4">Water Wisdom</h3>
+                    <p class="font-sans text-gaia-moss/70 leading-relaxed">Smart reminders for mindful consumption. Track hidden water costs in products you buy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave: White to Moss (Corrected Position & Rotation) -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-[calc(100%+1.3px)] h-16 md:h-24 lg:h-32 transform rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#2D382B"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Visual Break: Gooey Morphing Section -->
+    <section class="py-32 bg-gaia-moss relative overflow-hidden text-gaia-bg pb-48">
+        <!-- Gooey Background Animation -->
+        <div class="gooey-filter absolute inset-0 opacity-30 pointer-events-none">
+            <div class="absolute top-1/2 left-1/4 w-64 h-64 bg-gaia-sage rounded-full animate-blob mix-blend-screen opacity-70"></div>
+            <div class="absolute top-1/3 left-1/2 w-72 h-72 bg-gaia-clay rounded-full animate-blob animation-delay-2000 mix-blend-screen opacity-70"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gaia-sand rounded-full animate-blob animation-delay-4000 mix-blend-screen opacity-70"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10 px-6">
+            <div class="w-20 h-20 mx-auto mb-8 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
+                <span class="text-4xl">🌍</span>
+            </div>
+            <h2 class="font-serif text-5xl md:text-7xl mb-8 leading-tight">
+                We are not apart from nature, <br> we are <span class="italic text-gaia-sage">a part</span> of it.
+            </h2>
+            <p class="font-sans text-xl text-gaia-bg/80 max-w-2xl mx-auto mb-12">
+                Join 500,000+ humans returning to a balanced existence.
+            </p>
+            <button class="bg-gaia-bg text-gaia-moss font-sans font-bold text-lg px-12 py-5 rounded-[50px] hover:scale-105 transition-transform shadow-lg shadow-black/20">
+                Start Your Journey
+            </button>
+        </div>
+
+        <!-- Wave: Moss to Beige (Corrected Position & Rotation) -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+             <svg class="relative block w-[calc(100%+1.3px)] h-16 md:h-24 lg:h-32 transform rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#F9F7F2"></path>
+             </svg>
+        </div>
+    </section>
+
+    <!-- Gallery / Community (Masonry) -->
+    <section id="community" class="py-24 px-6 bg-gaia-bg relative">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="flex justify-between items-end mb-12">
+                <h2 class="font-serif text-4xl text-gaia-moss">The Garden</h2>
+                <a href="#" class="font-sans font-bold text-gaia-sage hover:text-gaia-moss transition-colors">View All Stories →</a>
+            </div>
+
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 pb-32">
+                <!-- Item 1 -->
+                <div class="break-inside-avoid relative group overflow-hidden" style="border-radius: 30px 50px 30px 30px;">
+                    <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=600&auto=format&fit=crop" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Plant">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gaia-moss/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white font-serif text-lg">Urban Regeneration Project</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="break-inside-avoid relative group overflow-hidden" style="border-radius: 50px 30px 50px 50px;">
+                    <img src="https://images.unsplash.com/photo-1470058869958-2a77ade41c02?q=80&w=600&auto=format&fit=crop" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Forest">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gaia-moss/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white font-serif text-lg">Reforestation Initiative</p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Corrected Image -->
+                <div class="break-inside-avoid relative group overflow-hidden" style="border-radius: 40px 40px 60px 40px;">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&auto=format&fit=crop" class="w-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Fresh Food">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gaia-moss/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                        <p class="text-white font-serif text-lg">Zero Waste Kitchen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Last Wave: Beige to Moss (Moved here for correct layering) -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-[calc(100%+1.3px)] h-16 md:h-24 lg:h-32 transform rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#2D382B"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gaia-moss text-gaia-bg pt-10 pb-10">
+        <div class="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 bg-gaia-sage rounded-full flex items-center justify-center text-white">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <span class="font-serif font-bold text-2xl">Gaia</span>
+                </div>
+                <p class="font-sans text-gaia-bg/60 max-w-sm">
+                    Restoring the planet, one habit at a time. Built with renewable energy and hosted on carbon-neutral servers.
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="font-serif text-lg mb-6 text-gaia-sage">Explore</h4>
+                <ul class="space-y-4 font-sans text-gaia-bg/60">
+                    <li><a href="#" class="hover:text-white transition-colors">Manifesto</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-serif text-lg mb-6 text-gaia-sage">Connect</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-gaia-bg/20 flex items-center justify-center hover:bg-gaia-sage hover:border-gaia-sage transition-all">IG</a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gaia-bg/20 flex items-center justify-center hover:bg-gaia-sage hover:border-gaia-sage transition-all">TW</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-20 font-sans text-sm text-gaia-bg/40">
+            © 2024 Gaia Labs. Rooted in Open Source.
+        </div>
+    </footer>
+
+    <style>
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 10s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+    </style>
+</body>
+</html>

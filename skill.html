@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Master Prompt Index | 11 Styles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'doc-black': '#111111',
+                        'doc-gray': '#F4F4F5',
+                        'doc-border': '#E4E4E7',
+                        'code-bg': '#18181B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::selection { background: #000; color: #fff; }
+        .prompt-card { transition: transform 0.2s ease; }
+        .prompt-card:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="bg-white text-doc-black antialiased selection:bg-black selection:text-white pb-32">
+
+    <!-- File Navigation Dropdown -->
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[60]">
+        <select onchange="if(this.value) window.location.href=this.value" class="bg-white text-black px-6 py-3 text-xs font-mono uppercase tracking-widest border-2 border-black hover:bg-black hover:text-white transition-all cursor-pointer rounded-full shadow-lg">
+            <option value="">🎨 Switch Style</option>
+            <option value="style-01.html">Refine AI</option>
+            <option value="style-02.html">Nook</option>
+            <option value="style-03.html">Prism</option>
+            <option value="style-04.html">GRIT</option>
+            <option value="style-05.html">Dough</option>
+            <option value="style-06.html">Lumina</option>
+            <option value="style-07.html">NetRunner</option>
+            <option value="style-08.html">VANTAGE</option>
+            <option value="style-09.html">JOLT</option>
+            <option value="style-10.html">ONYX</option>
+            <option value="style-11.html">Gaia</option>
+            <option value="wild-01.html">Neon Vortex</option>
+            <option value="wild-02.html">MORPHIC</option>
+            <option value="skill.html" selected>Master Index</option>
+        </select>
+    </div>
+
+    <!-- Header -->
+    <header class="border-b border-black py-12 px-6 md:px-12 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div>
+                <p class="font-mono text-xs uppercase tracking-widest text-gray-500 mb-2">Frontend Skill Pro v1.0</p>
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tight">The Master <br> Prompt Index.</h1>
+            </div>
+            <div class="text-right">
+                <p class="font-medium text-sm max-w-xs leading-relaxed text-gray-600">
+                    A curated collection of 11 distinctive aesthetic directions. <br>
+                    <span class="text-black font-bold">Copy. Paste. Build.</span>
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 md:px-12 py-16 space-y-24">
+
+        <!-- Instructions -->
+        <section class="bg-doc-gray p-8 border border-doc-border rounded-lg">
+            <h2 class="font-bold text-xl mb-4">How to use this index</h2>
+            <ol class="list-decimal list-inside space-y-2 font-mono text-sm text-gray-700">
+                <li>Choose a style below that fits your project vibe.</li>
+                <li>Copy the prompt block.</li>
+                <li>Replace the <span class="bg-white px-1 border border-gray-300 rounded text-black font-bold">[Bracketed Text]</span> with your specific content requirements.</li>
+                <li>Paste into the AI model.</li>
+            </ol>
+        </section>
+
+        <!-- Style 01 -->
+        <article id="style-01" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">01. Swiss Style / Minimalism</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: SaaS, Editorials, Portfolios</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Characterized by grid systems, asymmetric layouts, and huge typography. It removes all decoration to focus on content hierarchy.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#GridBased</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Typography</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Whitespace</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Landing Page / Dashboard]</span> for <span class="text-yellow-300">[Your App Name]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Minimalism & Swiss Style". Use a rigorous grid system, generous whitespace, and massive typography. Use a monochrome palette with one bold accent color (e.g., International Orange or Electric Blue). No shadows, no gradients. Pure structure.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Use a characterful grotesque sans-serif (e.g., Space Grotesk, Syne).<br>
+                        - Layout: Asymmetric, magazine-style layout. Visible grid lines are optional but encouraged.<br>
+                        - Elements: Sharp corners, thin strokes (1px borders).<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List your sections here, e.g., Hero, Features, Stats]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 02 -->
+        <article id="style-02" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">02. Neumorphism</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Wellness, Banking, IOT</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Soft, extruded plastics. Elements appear to be pushed out of or into the material. Very tactile and calming.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#SoftUI</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Monochromatic</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Tactile</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Mobile App Interface / Web Component]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Neumorphism / Soft UI". Use a monochromatic color palette (light gray, cream, or soft pastel). Elements should look like soft clay or extruded plastic using multiple drop shadows (light and dark) to create depth. No harsh borders.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Rounded, friendly sans-serif (e.g., Nunito, Outfit).<br>
+                        - Shapes: Extremely rounded corners (almost pill-shaped).<br>
+                        - Interaction: Buttons should look "pressed in" when active.<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List components, e.g., Music Player controls, Thermostat dial]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 03 -->
+        <article id="style-03" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">03. Glassmorphism</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Crypto, AI, Dashboards</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Frosted glass layers floating over a vibrant, moving background. Focuses on depth, translucency, and light borders.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Blur</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Translucent</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Vibrant</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Web Interface]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Glassmorphism". Use a dark, vibrant background with animated mesh gradients or orbs. Place UI elements on "frosted glass" cards using backdrop-filter blur, semi-transparent white backgrounds, and 1px white borders to catch the light.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Modern, clean sans-serif (e.g., Plus Jakarta Sans).<br>
+                        - Depth: Use layers to create a sense of Z-axis space.<br>
+                        - Colors: Deep void background with neon accents (Purple, Cyan, Magenta).<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List components, e.g., Credit Card visual, Data chart]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 04 -->
+        <article id="style-04" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">04. Brutalism</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Dev Tools, Streetwear, Art</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Raw, unpolished, and intentionally ugly. Uses default fonts, high contrast, hard shadows, and overlapping elements.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Raw</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#HighContrast</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#BrokenGrid</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Website / Tool]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Neo-Brutalism". Aesthetics should be raw, aggressive, and high-contrast. Use thick black borders (3-4px), hard drop shadows (no blur), and clashing colors (e.g., Neon Yellow on Black). Ignore traditional alignment rules.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Monospace (JetBrains Mono) mixed with aggressive display fonts (Chakra Petch).<br>
+                        - Layout: Masonry, broken grid, overlapping elements.<br>
+                        - Vibe: "Developer Mode", "Warning Signs", "Glitch".<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List content, e.g., Manifesto, Raw Code Block, Pricing Table]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 05 -->
+        <article id="style-05" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">05. Claymorphism</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Kids Apps, Gen-Z Fintech</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Friendly, inflated 3D shapes. Like Neumorphism but colorful and floating.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#3D</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Pastel</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Friendly</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Mobile Page / App]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Claymorphism". Elements should look like inflated 3D clay or marshmallow shapes floating in space. Use inner shadows and outer shadows to create volume. High corner radius (buttons are ovals).<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Colors: Candy pastels (Mint, Pink, Lilac) on a cream background.<br>
+                        - Font: Bouncy, rounded typography (Fredoka, Nunito).<br>
+                        - Details: Floating 3D elements, bubbly UI.<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List content, e.g., Savings Goal, Avatar Builder]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 06 -->
+        <article id="style-06" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">06. Aurora / Mesh Gradient</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Meditation, Creative AI</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Ethereal, moving color blends. Focuses on mood, breathing motion, and clean typography overlaying the color.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Gradient</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Atmospheric</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Flowing</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Website]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Aurora / Mesh Gradient". Background should be a deep void featuring slow-moving, breathing blobs of color (Teal, Violet, Magenta) creating a mesh gradient effect. The interface should feel dreamlike and ethereal.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: High-contrast Serif (Cormorant Garamond) paired with a clean Sans.<br>
+                        - Layout: Floating elements, glass-like overlays, minimal borders.<br>
+                        - Animation: Everything should have a subtle float/breathe animation.<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List content, e.g., Hero Statement, Audio Player]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 07 -->
+        <article id="style-07" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">07. Cyberpunk / Retro-Futurism</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Web3, Gaming, Security</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        High-tech, low-life. Neon colors on black, glitch effects, scanlines, and terminal aesthetics.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Neon</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Glitch</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#DarkMode</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Landing Page]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Cyberpunk / Retro-Futurism". Use a deep black background with aggressive neon accents (Cyan, Hot Pink, Acid Green). Incorporate CRT scanline overlays, glitch text effects, and HUD (Heads Up Display) elements.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Futuristic Display (Orbitron) and Data Mono (Share Tech Mono).<br>
+                        - UI: Angular corners, "cut" edges, glowing borders.<br>
+                        - Vibe: Hacker terminal, dystopian high-tech.<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List content, e.g., Terminal Window, Data Stream]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 08 -->
+        <article id="style-08" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">08. 3D Hyperrealism</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Hardware, Auto, Aerospace</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Focuses on realistic textures (metal, carbon fiber, glass) and cinematic lighting. Feels like a physical product.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Realistic</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Texture</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Cinematic</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Product Page]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "3D Hyperrealism". The interface should feel like high-end hardware. Use textures like Brushed Titanium, Carbon Fiber, and Optical Glass. Use deep perspective transforms and realistic shadows/reflections.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Technical, wide sans-serif (Unbounded, Rajdhani).<br>
+                        - Palette: Gunmetal Grey, Silver, Electric Blue light sources.<br>
+                        - UI: Skeuomorphic switches, lens flares, engraved text effects.<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List content, e.g., Spec Sheet, 3D Product View]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 09 -->
+        <article id="style-09" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">09. Vibrant Maximalist</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Energy Drinks, Music, Fashion</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Loud, colorful, and busy. Solid blocks of RGB colors, thick borders, and shouting typography.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Loud</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Colorful</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Bold</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Promo Page]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Vibrant Block / Maximalist". Use solid, clashing blocks of pure RGB colors (Blue, Acid Lime, Hot Pink). Use thick (4px) black borders around everything. The vibe should be high-energy and loud.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Massive, heavy display fonts (Archivo Black, Clash Display).<br>
+                        - Layout: Masonry grids, marquee scrolling text, collage elements.<br>
+                        - Interaction: Instant "snap" hover effects, no fading.<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List content, e.g., Big Statement, Buy Button]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 10 -->
+        <article id="style-10" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">10. Dark OLED Luxury</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Luxury Goods, Private Clubs</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Absolute black backgrounds with gold or metallic accents. Focuses on negative space and premium textures.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Luxury</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Dark</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Gold</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Landing Page]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Dark OLED Luxury". Use absolute black (#000000) backgrounds with Gold (#D4AF37) accents. The aesthetic should be silent, heavy, and premium. Use subtle noise textures to simulate expensive paper.<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Regal Serif (Cinzel) paired with geometric Sans (Montserrat).<br>
+                        - Effects: "Spotlight" cursor effects that reveal details in the dark.<br>
+                        - Text: Gold foil gradients on key typography.<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List content, e.g., Membership Card, Inquiry Form]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Style 11 -->
+        <article id="style-11" class="group">
+            <div class="flex items-baseline justify-between border-b border-black pb-4 mb-8">
+                <h2 class="text-3xl font-bold">11. Organic / Biomorphic</h2>
+                <span class="font-mono text-xs bg-black text-white px-2 py-1 rounded">Best for: Sustainability, Nature, Biology</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Rejects straight lines. Uses fluid shapes, blobs, and natural colors. Everything feels alive and morphing.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Organic</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Fluid</span>
+                        <span class="px-2 py-1 border border-gray-200 text-xs font-mono rounded">#Nature</span>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="bg-code-bg text-gray-300 p-6 rounded-lg font-mono text-xs leading-relaxed overflow-x-auto border border-gray-800 shadow-2xl relative group-hover:ring-2 ring-black transition-all">
+                        <div class="absolute top-4 right-4 text-gray-500 select-none">PROMPT</div>
+                        <span class="text-purple-400">Design a</span> high-fidelity <span class="text-yellow-300">[Landing Page]</span> for <span class="text-yellow-300">[Your Brand]</span>.<br><br>
+                        
+                        <span class="text-blue-400">Style Direction:</span><br>
+                        "Organic / Biomorphic". Reject straight lines. Use fluid, morphing blob shapes for backgrounds and image masks. The palette should be "Living Earth" (Sage Green, Clay, Sand, Moss).<br><br>
+                        
+                        <span class="text-blue-400">Visual Requirements:</span><br>
+                        - Font: Friendly Rounded Sans (Quicksand) and Organic Serif (Philosopher).<br>
+                        - Shapes: Complex border-radius (blobs), wavy section dividers.<br>
+                        - Animation: Constant "breathing" or morphing motion.<br><br>
+                        
+                        <span class="text-blue-400">Content to Include:</span><br>
+                        - <span class="text-yellow-300">[List content, e.g., Mission Statement, Impact Stats]</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <footer class="bg-doc-black text-white py-12 text-center">
+        <p class="font-mono text-xs text-gray-500">GENERATED BY FRONTEND SKILL PRO</p>
+    </footer>
+
+</body>
+</html>
